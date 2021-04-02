@@ -39,4 +39,17 @@ function generateTable(tableData) {
 // when the button is clicked, (i.e., I'm defining the handleClick function 
 // on line 11).
 
+// Using insights from activity 3-8
+
+function handleClick() {
+
+    d3.event.preventDefault();
+
+    var sight_date = d3.select("#datetime").property("value");
+    console.log(sight_date);
+
+    if (sight_date 
+
+
+}
 
