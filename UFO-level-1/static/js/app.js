@@ -13,15 +13,30 @@ d3.selectAll("#filter-btn").on("click", handleClick);
 // Step 2:  Create the function that will be called by our primary handleClick
 // function to generate the dynamic table.
 
-// We're using insights from activities 3-3
+// We're using insights from activities 3-3 here.
 
-function generateTable(ufo_data) {
+function generateTable(tableData) {
+
     var tbody = d3.select("tbody");
 
     // this resets tbody element to null
     tbody.html("");
 
-    ufo_data.
-
-
+    tableData.forEach(function(aliens) {
+        console.log(aliens);
+        var row = tbody.append("tr");
+        Object.entries(aliens).forEach(function([key, value]) {
+          console.log(key, value);
+          // Append a cell to the row for each value
+          // in the weather report object
+          var cell = row.append("td");
+          cell.text(value);
+        });
+      });
 }
+
+// Step 3:  Create the function that calls my generateTable Function
+// when the button is clicked, (i.e., I'm defining the handleClick function 
+// on line 11).
+
+
