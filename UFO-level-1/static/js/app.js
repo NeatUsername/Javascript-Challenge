@@ -22,7 +22,7 @@ function generateTable(tableData) {
     // this resets tbody element to null
     tbody.html("");
 
-    tableData.forEach(function(aliens) {
+    data.forEach(function(aliens) {
         console.log(aliens);
         var row = tbody.append("tr");
         Object.entries(aliens).forEach(function([key, value]) {
@@ -46,22 +46,26 @@ function handleClick() {
     // Prevent webpage refresh from breaking filter action
     d3.event.preventDefault();
 
-    var sight_date = d3.select("#datetime").property("value");
-    console.log(sight_date);
+    var sightDate = d3.select("#datetime").property("value");
+    console.log(sightDate);
 
     // Conditional, triggers filter action only if date is not null
-    if (sight_date != "") {
+    if (sightDate != "") {
 
     // Creating a new data object so we don't have to reset the original tableData object at end of code
       var tableData2 = tableData;
 
+    // function that qualifies the subset of data to build
+
       tableData2 = data.filter(function (data){
 
-        var 
+        var alien_date = data.datetime;
+        return alien_date === sightDate;
 
-      }
-    }
-
-
+      });
+    };
+// function call, take the qualified data parameters and executed the table generation function set prior
+generateTable();
 }
+
 
