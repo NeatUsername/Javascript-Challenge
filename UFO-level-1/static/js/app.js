@@ -16,24 +16,22 @@ d3.selectAll("#filter-btn").on("click", handleClick);
 // We're using insights from activities 3-3 here.
 
 function generateTable(tableData) {
+  var tbody = d3.select("tbody");
+  
+  tbody.html("");
 
-    var tbody = d3.select("tbody");
+  tableData.forEach(row => {
+      //console.log(row);
+      var tr = tbody.append("tr");
 
-    // this resets tbody element to null
-    tbody.html("");
+      Object.values(row).forEach(cell => {
+         var sight = tr.append("td");
+         sight.text(cell);
+       });
 
-    data.forEach(function(aliens) {
-        console.log(aliens);
-        var row = tbody.append("tr");
-        Object.entries(aliens).forEach(function([key, value]) {
-          console.log(key, value);
-          // Append a cell to the row for each value
-          // in the weather report object
-          var cell = row.append("td");
-          cell.text(value);
-        });
-      });
+  });
 }
+
 
 // Step 3:  Create the function that calls my generateTable Function
 // when the button is clicked, (i.e., I'm defining the handleClick function 
@@ -43,29 +41,18 @@ function generateTable(tableData) {
 
 function handleClick() {
 
-    // Prevent webpage refresh from breaking filter action
-    d3.event.preventDefault();
+  var date = d3.select("#datetime").property("value");
 
-    var sightDate = d3.select("#datetime").property("value");
-    console.log(sightDate);
+  // Creating a new data object so we don't have to reset the original tableData object at end of code
+  var sightDate = tableData;
 
-    // Conditional, triggers filter action only if date is not null
-    if (sightDate != "") {
+  // Conditional, triggers filter action only if date is not null
+  if (date) {
+      sightDate = sightDate.filter( ufo => ufo.datetime === date);
+  };
 
-    // Creating a new data object so we don't have to reset the original tableData object at end of code
-      var tableData2 = tableData;
+  generateTable(sightDate)
+};
 
-    // function that qualifies the subset of data to build
-
-      tableData2 = data.filter(function (data){
-
-        var alien_date = data.datetime;
-        return alien_date === sightDate;
-
-      });
-    };
-// function call, take the qualified data parameters and executed the table generation function set prior
-generateTable();
-}
-
-
+// Calling my table generation function in case no date is entered upon click
+generateTable(tableData);
