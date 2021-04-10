@@ -43,12 +43,24 @@ function generateTable(tableData) {
 
 function handleClick() {
 
+    // Prevent webpage refresh from breaking filter action
     d3.event.preventDefault();
 
     var sight_date = d3.select("#datetime").property("value");
     console.log(sight_date);
 
-    if (sight_date 
+    // Conditional, triggers filter action only if date is not null
+    if (sight_date != "") {
+
+    // Creating a new data object so we don't have to reset the original tableData object at end of code
+      var tableData2 = tableData;
+
+      tableData2 = data.filter(function (data){
+
+        var 
+
+      }
+    }
 
 
 }
